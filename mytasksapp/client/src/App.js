@@ -1,31 +1,21 @@
-import react, {useEffect, useState} from 'react';
-import * as api from './api/index.js';
-import Navbar from './components/NavBar/Navbar.js'
-import Footer from './components/Footer/Footer.js'
+import Home from './pages/Home.js'
+import TaskDetails from './pages/TaskDetails.js'
+import AddTask from './pages/AddTask.js'
+import EditTask from './pages/EditTask.js'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
 
-  const [tasks,setTasks] = useState([]);
-
-  async function getData(){
-    const {data} = await api.fetchTasks();
-    setTasks(data);
-    console.log(data);
-  }
-
-  useEffect(()=>{
-    getData();
-  },[]);
-
   return (
     <div className="App">
-      <Navbar/>
-      {tasks?.map((task)=>{
-        return(
-          <h2>{task.title}</h2>
-        )
-      })}
-      <Footer/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/taskdetails/:id" element={<TaskDetails/>}/>
+          <Route path="/addtask" element={<AddTask/>}/>
+          <Route path="/edittask/:id" element={<EditTask/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

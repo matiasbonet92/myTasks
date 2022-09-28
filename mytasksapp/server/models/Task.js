@@ -7,7 +7,15 @@ const taskSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    comments: [String],
+    comments: [{
+        comment: {
+            type: String
+        }, 
+        commentCreatedAt: {
+            type: Date,
+            default: Date()
+        }
+    }],
     createdAt: {
         type: Date,
         default: Date()
